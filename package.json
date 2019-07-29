@@ -14,9 +14,12 @@
     "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
+    "@types/cheerio": "^0.22.12",
     "@types/dotenv": "^6.1.1",
+    "@types/got": "^9.6.4",
     "@types/jest": "^24.0.12",
     "@types/node": "^12.0.0",
+    "@types/qs": "^6.5.3",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "eslint": "^5.16.0",
@@ -31,6 +34,12 @@
     "typescript": "^3.4.5"
   },
   "dependencies": {
-    "dotenv": "^7.0.0"
+    "cheerio": "^1.0.0-rc.3",
+    "dotenv": "^7.0.0",
+    "fastify": "^2.7.0",
+    "got": "^9.6.0",
+    "json5": "^2.1.0",
+    "wakeonlan": "^0.1.0",
+    "yn": "^3.1.0"
   }
 }
