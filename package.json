@@ -13,7 +13,10 @@
     "unraid",
     "vm",
 		"api"
-	],
+  ],
+  "np": {
+    "contents": "dist"
+  },
   "scripts": {
     "ts-node": "node -r tsconfig-paths/register -r ts-node/register -r dotenv/config",
     "build": "rm -rvf dist && tsc",
