@@ -4,15 +4,15 @@
   "main": "index.js",
   "license": "GPL-3.0",
   "engines": {
-		"node": ">=10"
+    "node": ">=10"
   },
   "files": [
-		"dist"
+    "dist"
   ],
   "keywords": [
     "unraid",
     "vm",
-		"api"
+    "api"
   ],
   "np": {
     "contents": "dist"
