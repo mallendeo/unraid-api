@@ -21,9 +21,9 @@ export const setHost = (_host: string) => (host = _host)
 export const setSecure = (_secure: boolean) => (secure = _secure)
 
 export const getConfig = async () => {
-  const { body: html } = await got.get('Main')
-  const configStr = html.match(/display[\s\S]+vars\s+=(.+);/)[1].trim()
-  return JSON.parse(configStr)
+  const { body } = await got.get('Main')
+  const configStr = body.match(/display[\s\S]+vars\s+=(.+);/)[1].trim()
+  return JSON5.parse(configStr)
 }
 
 export const renewCsrf = async () => (token = (await getConfig()).csrf_token)
@@ -199,7 +199,7 @@ export const stopVM = async (uuid: string, force = false) =>
 export const getDisks = async () => {
   const devices = ['array', 'cache', 'flash', 'parity']
 
-  const htmls = await Promise.all(
+  const pages = await Promise.all(
     devices.map(device =>
       post('webGui/include/DeviceList.php', {
         path: 'Main',
@@ -208,7 +208,7 @@ export const getDisks = async () => {
     )
   )
 
-  return htmls
+  return pages
     .map(html => {
       const $ = cheerio.load(`<table>${html}</table>`)
 

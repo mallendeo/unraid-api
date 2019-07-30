@@ -13,13 +13,17 @@ import unraid from 'unraid-api'
 
 unraid.setAuth('root:password')
 unraid.setHost('https://Tower.local')
+unraid.setSecure(false) // ignore ssl certificate
 ```
+
+or provide `UNRAID_AUTH`, `UNRAID_HOST`, or `UNRAID_SECURE` env vars.
+
 ## Available methods
 
 ```ts
 setAuth(auth: string)
 setHost(host: string)
-setSecure(secure: boolean) // ignore ssl certificate if false
+setSecure(secure: boolean)
 renewCsrf()
 
 getConfig()
