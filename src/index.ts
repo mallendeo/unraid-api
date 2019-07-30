@@ -1,13 +1,20 @@
 import got from 'got'
 import cheerio from 'cheerio'
 import JSON5 from 'json5'
+import yn from 'yn'
 
 const VM_AJAX = 'plugins/dynamix.vm.manager/include/VMajax.php'
 
+const {
+  UNRAID_AUTH,
+  UNRAID_HOST = 'https://Tower.local',
+  UNRAID_SECURE = false,
+} = process.env
+
 let token: string
-let auth: string
-let host = 'https://Tower.local'
-let secure = false
+let auth: string = UNRAID_AUTH
+let host = UNRAID_HOST
+let secure = yn(UNRAID_SECURE)
 
 export const setAuth = (_auth: string) => (auth = _auth)
 export const setHost = (_host: string) => (host = _host)
@@ -19,10 +26,13 @@ export const getConfig = async () => {
   return JSON.parse(configStr)
 }
 
+export const renewCsrf = async () => (token = (await getConfig()).csrf_token)
+
 const post = async (path: string, form = {}) => {
   if (!auth) throw Error(`You must set the auth string using 'setAuth'`)
 
-  token = token || (await getConfig()).csrf_token
+  token || renewCsrf()
+
   const { body } = await got.post(path, {
     form: true,
     baseUrl: host,
