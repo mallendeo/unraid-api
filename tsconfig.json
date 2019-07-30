@@ -5,17 +5,15 @@
     "moduleResolution": "node",
     "pretty": true,
     "sourceMap": true,
-    "target": "esnext",
-    "outDir": "./build",
+    "target": "es2017",
+    "outDir": "./dist",
     "baseUrl": "./src",
     "esModuleInterop": true,
     "allowJs": true,
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "@/*": ["./*"],
-      "@components/*": ["./components/*"]
     }
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.test.ts"]
+  "include": ["src"],
 }

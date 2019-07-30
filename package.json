@@ -5,30 +5,20 @@
   "license": "GPL-3.0",
   "scripts": {
     "ts-node": "node -r tsconfig-paths/register -r ts-node/register -r dotenv/config",
-    "start": "yarn ts-node --inspect=5858 src/server.ts",
-    "dev": "nodemon",
-    "build": "rm -rvf build && tsc",
-    "serve": "node build/server.js",
-    "test": "yarn lint && jest",
+    "build": "rm -rvf dist && tsc",
     "lint": "eslint 'src/**/*.@(ts|js|tsx|jsx)'",
     "lint:fix": "yarn lint --fix"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.12",
-    "@types/dotenv": "^6.1.1",
     "@types/got": "^9.6.4",
-    "@types/jest": "^24.0.12",
     "@types/node": "^12.0.0",
-    "@types/qs": "^6.5.3",
     "@typescript-eslint/eslint-plugin": "^1.7.0",
     "@typescript-eslint/parser": "^1.7.0",
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.2.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "jest": "^24.8.0",
-    "nodemon": "^1.19.0",
     "prettier": "^1.17.0",
-    "ts-jest": "^24.0.2",
     "ts-node": "^8.1.0",
     "tsconfig-paths": "^3.8.0",
     "typescript": "^3.4.5"
@@ -36,10 +26,7 @@
   "dependencies": {
     "cheerio": "^1.0.0-rc.3",
     "dotenv": "^7.0.0",
-    "fastify": "^2.7.0",
     "got": "^9.6.0",
-    "json5": "^2.1.0",
-    "wakeonlan": "^0.1.0",
-    "yn": "^3.1.0"
+    "json5": "^2.1.0"
   }
 }

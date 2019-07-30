@@ -1,33 +1,38 @@
 import got from 'got'
 import cheerio from 'cheerio'
 import JSON5 from 'json5'
-import config from '@/config'
 
 const VM_AJAX = 'plugins/dynamix.vm.manager/include/VMajax.php'
 
 let token: string
+let auth: string
+let host = 'https://Tower.local'
+let secure = false
 
-export const client = got.extend({
-  auth: config.unraid.auth,
-  baseUrl: config.unraid.host,
-  rejectUnauthorized: config.unraid.secure,
-})
+export const setAuth = (_auth: string) => (auth = _auth)
+export const setHost = (_host: string) => (host = _host)
+export const setSecure = (_secure: boolean) => (secure = _secure)
 
 export const getConfig = async () => {
-  const { body: html } = await client.get('Main')
+  const { body: html } = await got.get('Main')
   const configStr = html.match(/display[\s\S]+vars\s+=(.+);/)[1].trim()
   return JSON.parse(configStr)
 }
 
 const post = async (path: string, form = {}) => {
+  if (!auth) throw Error(`You must set the auth string using 'setAuth'`)
+
   token = token || (await getConfig()).csrf_token
-  const { body } = await client.post(path, {
+  const { body } = await got.post(path, {
     form: true,
+    baseUrl: host,
+    rejectUnauthorized: secure,
+    auth,
     body: {
       ...form,
       ['csrf_token']: token,
     },
-  } as any)
+  })
 
   return body
 }
@@ -39,7 +44,7 @@ const update = async (form = {}, htm = false) =>
   })
 
 export const getMAC = async () => {
-  const { body } = await client.get('Settings/NetworkSettings')
+  const { body } = await got.get('Settings/NetworkSettings')
   const $ = cheerio.load(body)
   return $('#index-eth0-0')
     .find('.big')
@@ -67,7 +72,7 @@ export const stopArray = async () =>
   update({ startState: 'STARTED', cmdStart: 'Stop' }, true)
 
 export const getVMs = async () => {
-  const { body } = await client.get(
+  const { body } = await got.get(
     'plugins/dynamix.vm.manager/include/VMMachines.php'
   )
 
@@ -82,7 +87,7 @@ export const getVMs = async () => {
 
 // TODO: Add other PCI devices
 export const getVM = async (uuid: string) => {
-  const { body } = await client.get('VMs/UpdateVM', { query: { uuid } })
+  const { body } = await got.get('VMs/UpdateVM', { query: { uuid } })
   const $ = cheerio.load(body)
 
   return {

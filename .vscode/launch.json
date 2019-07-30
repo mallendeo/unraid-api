@@ -2,23 +2,6 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Launch Server",
-      "type": "node",
-      "request": "launch",
-      "args": ["src/server.ts"],
-      "runtimeArgs": [
-        "-r",
-        "ts-node/register",
-        "-r",
-        "tsconfig-paths/register",
-        "-r",
-        "dotenv/config"
-      ],
-      "outputCapture": "std",
-      "cwd": "${workspaceRoot}",
-      "protocol": "inspector"
-    },
-    {
       "name": "Current TS File",
       "type": "node",
       "request": "launch",
