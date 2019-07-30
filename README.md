@@ -37,7 +37,7 @@ stopArray()
 getVMs()
 getVM(uuid: string)
 startVM(uuid: string)
-stopVM(uuid: string)
+stopVM(uuid: string, force?: boolean)
 
 reboot()
 poweroff()
