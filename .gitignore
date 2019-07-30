@@ -6,3 +6,5 @@ logs
 .env
 node_modules
 dist
+
+yarn.lock
