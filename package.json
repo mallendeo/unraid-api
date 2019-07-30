@@ -3,6 +3,17 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "GPL-3.0",
+  "engines": {
+		"node": ">=10"
+  },
+  "files": [
+		"dist"
+  ],
+  "keywords": [
+    "unraid",
+    "vm",
+		"api"
+	],
   "scripts": {
     "ts-node": "node -r tsconfig-paths/register -r ts-node/register -r dotenv/config",
     "build": "rm -rvf dist && tsc",
