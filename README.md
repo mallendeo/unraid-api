@@ -9,7 +9,7 @@ yarn add unraid-api
 ## Init
 
 ```ts
-import unraid from 'unraid-api'
+import * as unraid from 'unraid-api'
 
 unraid.setAuth('root:password')
 unraid.setHost('https://Tower.local')
